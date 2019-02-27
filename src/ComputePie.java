@@ -4,12 +4,12 @@ import java.util.LinkedList;
 public class ComputePie implements Runnable {
 
     private LinkedList TaskQueue;
-    private HashMap HashTable;
+    private HashTable hash;
     private int i = 0;
 
     public ComputePie(TaskQueue queue, HashTable hashTable){
         this.TaskQueue = queue.MyList();
-        this.HashTable = hashTable.ResultTable;
+        this.hash = hashTable;
     }
 
     public void run() {
@@ -18,18 +18,16 @@ public class ComputePie implements Runnable {
         TaskQueue myTQ = new TaskQueue();
 
         try {
-            while (TaskQueue.size() > 0) {
-                int temp = bpp.getDecimal(myTQ.getNext(this.TaskQueue));
-                this.HashTable.put(i, temp);
-                i++;
+            while (this.TaskQueue.size() > 0) {
+
+                long key = myTQ.getNext(this.TaskQueue);
+                int temp = bpp.getDecimal(key);
+                int value = temp / 100000000;
+                this.hash.ResultTable.put((int)key, value);
             }
 
-            System.out.println("hello");
+            System.out.print(".");
 
-
-//            for(int j = 1; j <= TaskQueue.size(); j++){
-//                t[0].run();
-//            }
         }
         catch (Exception ex) {
             System.out.println("Error. Error.");

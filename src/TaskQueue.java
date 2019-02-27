@@ -10,7 +10,7 @@ public class TaskQueue{
     private static int i = 0;
 
     public static LinkedList MyList() {
-        for(long i = 0; i < 999; i++) {
+        for(long i = 1; i < 100; i++) {
             list.add(i);
         }
 
@@ -20,20 +20,14 @@ public class TaskQueue{
             TaskQueue.add(item);
         }
 
-        for(Object item: TaskQueue){
-            System.out.println(item);
-        }
+//        for(Object item: TaskQueue){
+//            System.out.println(item);
+//        }
 
         return TaskQueue;
     }
 
     synchronized long getNext(LinkedList TaskQueue) {
-        if(i == 0){
-            return TaskQueue.indexOf(i);
-        }
-        else {
-            i++;
-            return TaskQueue.indexOf(i);
-        }
+        return ((Long)TaskQueue.pop());
     }
 }
